@@ -1,8 +1,8 @@
-from utils.html.v_1_21 import KindleHtml_1_21
+from utils.html.v_1_21 import KindleNotesHtml_1_21
 
 def kindle_factory(version):
     SUPPORTED_VERSION = {
-        '1.21': KindleHtml_1_21
+        '1.21': KindleNotesHtml_1_21
     }
     return SUPPORTED_VERSION.get(version)()
 

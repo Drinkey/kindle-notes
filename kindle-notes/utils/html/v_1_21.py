@@ -1,7 +1,7 @@
 from enum import Enum
-from utils.html.base import KindleHtml
+from utils.html.base import KindleNotesHtml
 
-class KindleHtml_1_21(KindleHtml):
+class KindleNotesHtml_1_21(KindleNotesHtml):
     class Selector(Enum):
         TITLE = 'body > div > div.bookTitle'
         AUTHOR = 'body > div > div.authors'
@@ -11,4 +11,4 @@ class KindleHtml_1_21(KindleHtml):
         S_NOTE_TEXT = 'div.noteText'
 
     def __init__(self):
-        KindleHtml.__init__(self, self.Selector)
+        KindleNotesHtml.__init__(self, self.Selector)

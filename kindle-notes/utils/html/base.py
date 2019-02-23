@@ -2,7 +2,7 @@ import re
 from enum import Enum
 import requests_html
 
-from format.objects import KindleNotes, NoteElement
+from utils.objects import KindleNotes, NoteElement
 
 def get_note_heading_text(heading):
     rex = re.search(r'Highlight.*\-\s(.*)\s\> Location.*', heading)

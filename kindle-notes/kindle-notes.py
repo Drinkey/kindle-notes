@@ -3,6 +3,8 @@
 import argparse
 import os
 import re
+from utils.common import kindle_html2md, convert2md, save_to
+
 
 parser = argparse.ArgumentParser(
     description='Convert HTML/CSV Document exported from Kindle for Mac (1.21.0) to Markdown')
@@ -13,6 +15,7 @@ parser.add_argument('--csv', type=str, dest='csv_doc',
                     help='Path of CSV document exported from Kindle(Not Implemented)')
 parser.add_argument('--to', type=str, dest='to_path',
                     help='Path of Markdown docuemnt generate to')
+
 
 def main():
     args = parser.parse_args()

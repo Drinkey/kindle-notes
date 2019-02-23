@@ -1,5 +1,5 @@
 from enum import Enum
-from format.html.base import KindleHtml
+from utils.html.base import KindleHtml
 
 class KindleHtml_1_21(KindleHtml):
     class Selector(Enum):

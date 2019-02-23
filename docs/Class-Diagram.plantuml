@@ -1,0 +1,57 @@
+@startuml
+
+abstract class KindleNotes {
++title: String
++author: String
++notes: NoteElement
++parse()
+}
+
+class NoteElement{
++section
++heading
++text
+}
+
+enum Selector{
++ TITLE
++ AUTHOR
++ SECTIONS
++ S_HEADING
++ S_NOTE_HEADING
++ S_NOTE_TEXT
+}
+
+class KindleNotesHtml_1_21{
+Selector
+}
+
+class KindleNotesHtml_1_23{
+Selector
+}
+
+class KindleNotesHtml{
+- _html
+- _selector: Enum Selector
+- _extract_notes()
+}
+
+class KindleNotesCsv{
+- _csv
+- _extract_notes()
+}
+
+class KindleNotesText{
+- _text
+- _extract_notes()
+}
+
+
+KindleNotesHtml_1_21 -up-|> KindleNotesHtml
+KindleNotesHtml_1_23 -up-|> KindleNotesHtml
+KindleNotesHtml .up.|> KindleNotes
+KindleNotesCsv .up.|> KindleNotes
+KindleNotesText .up.|> KindleNotes
+NoteElement -left-o KindleNotes: 1..*
+
+@enduml

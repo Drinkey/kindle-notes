@@ -20,7 +20,7 @@ def html_line_parser(html, selector):
     return ''
 
 
-class KindleHtml(KindleNotes):
+class KindleNotesHtml(KindleNotes):
     def __init__(self, selector: Enum):
         self._html = None
         self._selector = selector

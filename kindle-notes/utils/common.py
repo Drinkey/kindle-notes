@@ -1,4 +1,5 @@
 from utils.html.v_1_21 import KindleNotesHtml_1_21
+from utils.objects import KindleNotesMarkdown
 
 def kindle_factory(version):
     SUPPORTED_VERSION = {
@@ -17,8 +18,8 @@ def kindle_html2md(html_doc_path):
     
     return kindle_html
 
-def convert2md(md_dict):
-    return ''
+def convert2md(kindle_notes):
+    return KindleNotesMarkdown.convert(kindle_notes)
 
 def save_to(to_path, file_content):
     with open(to_path, 'w', encoding='utf-8') as fp:

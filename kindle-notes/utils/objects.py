@@ -20,7 +20,7 @@ class NoteElement(object):
         return "<section: ('{}'), heading: ('{}'), text: ('{}')>".format(
             self.section, self.heading, self.text)
 
-class MardownFormatter(Enum):
+class MarkdownFormatter(Enum):
     TITLE = "# {}\n\n"
     AUTHOR = "> {}\n\n"
     SECTION = "## {}\n\n"
@@ -31,14 +31,14 @@ class KindleNotesMarkdown(object):
     @staticmethod
     def convert(notes: KindleNotes):
         buffer = ''
-        buffer += MardownFormatter.TITLE.value.format(notes.title)
-        buffer += MardownFormatter.AUTHOR.value.format(notes.author)
+        buffer += MarkdownFormatter.TITLE.value.format(notes.title)
+        buffer += MarkdownFormatter.AUTHOR.value.format(notes.author)
         for note in notes.notes:
-            buffer += MardownFormatter.SECTION.value.format(note.section) \
+            buffer += MarkdownFormatter.SECTION.value.format(note.section) \
                 if note.section else ''
-            buffer += MardownFormatter.S_HEADING.value.format(note.heading) \
+            buffer += MarkdownFormatter.S_HEADING.value.format(note.heading) \
                 if note.heading else ''
-            buffer += MardownFormatter.S_TEXT.value.format(note.text) \
+            buffer += MarkdownFormatter.S_TEXT.value.format(note.text) \
                 if note.text else ''
             buffer += '\n'
         return buffer

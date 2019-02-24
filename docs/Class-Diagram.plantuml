@@ -1,10 +1,24 @@
 @startuml
 
-abstract class KindleNotes {
+class KindleNotesMarkdown {
++ {static} convert(notes: KindleNotes)
+}
+
+enum MarkdownFormatter {
++ TITLE
++ AUTHOR
++ SECTION
++ S_HEADING
++ S_TEXT
+}
+
+KindleNotesMarkdown -- MarkdownFormatter
+
+abstract class KindleNotes<<abstract>> {
 +title: String
 +author: String
-+notes: NoteElement
-+parse()
++notes: <<List>> NoteElement
++{abstract}parse()
 }
 
 class NoteElement{
@@ -23,35 +37,35 @@ enum Selector{
 }
 
 class KindleNotesHtml_1_21{
-Selector
+selector
 }
 
 class KindleNotesHtml_1_23{
-Selector
+selector
 }
 
-class KindleNotesHtml{
+class KindleNotesHtml <<KindleNotes>>{
 - _html
-- _selector: Enum Selector
+- _selector: <<Enum>>Selector
 - _extract_notes()
 }
 
-class KindleNotesCsv{
+class KindleNotesCsv <<KindleNotes>>{
 - _csv
 - _extract_notes()
 }
 
-class KindleNotesText{
+class KindleNotesText <<KindleNotes>>{
 - _text
 - _extract_notes()
 }
 
-
+KindleNotesHtml -right- Selector
 KindleNotesHtml_1_21 -up-|> KindleNotesHtml
 KindleNotesHtml_1_23 -up-|> KindleNotesHtml
 KindleNotesHtml .up.|> KindleNotes
 KindleNotesCsv .up.|> KindleNotes
 KindleNotesText .up.|> KindleNotes
-NoteElement -left-o KindleNotes: 1..*
+NoteElement -left-o KindleNotes: has n notes
 
 @enduml

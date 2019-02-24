@@ -21,16 +21,15 @@ def main():
     args = parser.parse_args()
     
     html_doc_path = os.path.abspath(args.html_doc)
-    print(html_doc_path)
 
     md_dict = kindle_html2md(html_doc_path)
-    print(md_dict)
     
     md_content = convert2md(md_dict)
+    
     if not args.to_path:
         print(md_content)
     else:
-        save_to(args.to, md_content)
+        save_to(args.to_path, md_content)
 
 if __name__ == '__main__':
     main()

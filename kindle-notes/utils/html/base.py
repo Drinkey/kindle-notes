@@ -43,6 +43,10 @@ class KindleNotesHtml(KindleNotes):
             note.heading = get_note_heading_text(
                 html_line_parser(inner_html, self._selector.S_NOTE_HEADING.value)
             )
+            # Notes and note heading already in order, just need to check if the heading already
+            # exists in previous notes. If exists, set current note.heading to none
+            if note.heading in [n.heading for n in notes]:
+                note.heading = ''
             note.text = html_line_parser(inner_html, self._selector.S_NOTE_TEXT.value)
             notes.append(note)
         return notes

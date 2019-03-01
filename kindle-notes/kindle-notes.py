@@ -11,20 +11,23 @@ parser = argparse.ArgumentParser(
 
 parser.add_argument('--html', type=str, dest='html_doc',
                     help='Path of HTML document exported from Kindle')
+parser.add_argument('--version', type=str, dest='html_ver', default="1.21",
+                    help='The version of HTML document')
+parser.add_argument('--lang', type=str, dest='lang', default="cn",
+                    help='The language of HTML document, if en, extra space will not be stripped.')
 parser.add_argument('--csv', type=str, dest='csv_doc',
                     help='Path of CSV document exported from Kindle(Not Implemented)')
 parser.add_argument('--to', type=str, dest='to_path',
                     help='Path of Markdown docuemnt generate to')
-
 
 def main():
     args = parser.parse_args()
     
     html_doc_path = os.path.abspath(args.html_doc)
 
-    md_dict = kindle_html2md(html_doc_path)
+    md_dict = kindle_html2md(args.html_ver, html_doc_path)
     
-    md_content = convert2md(md_dict)
+    md_content = convert2md(md_dict, args.lang)
     
     if not args.to_path:
         print(md_content)

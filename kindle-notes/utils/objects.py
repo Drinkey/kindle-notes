@@ -23,22 +23,24 @@ class NoteElement(object):
 class MarkdownFormatter(Enum):
     TITLE = "# {}\n\n"
     AUTHOR = "> {}\n\n"
-    SECTION = "## {}\n\n"
-    S_HEADING = "### {}\n\n"
-    S_TEXT = "* {}\n"
+    SECTION = "# {}\n\n"
+    S_HEADING = "## {}\n\n"
+    S_TEXT = "> {}\n"
 
 class KindleNotesMarkdown(object):
     @staticmethod
-    def convert(notes: KindleNotes):
-        buffer = ''
-        buffer += MarkdownFormatter.TITLE.value.format(notes.title)
+    def convert(notes: KindleNotes, lang: str):
+        buffer = MarkdownFormatter.TITLE.value.format(notes.title)
         buffer += MarkdownFormatter.AUTHOR.value.format(notes.author)
         for note in notes.notes:
-            buffer += MarkdownFormatter.SECTION.value.format(note.section) \
-                if note.section else ''
-            buffer += MarkdownFormatter.S_HEADING.value.format(note.heading) \
-                if note.heading else ''
-            buffer += MarkdownFormatter.S_TEXT.value.format(note.text) \
-                if note.text else ''
-            buffer += '\n'
+            if note.section:
+                buffer += MarkdownFormatter.SECTION.value.format(note.section)
+            if note.heading:
+                buffer += MarkdownFormatter.S_HEADING.value.format(note.heading)
+            if note.text:
+                if lang == "cn":
+                    buffer += MarkdownFormatter.S_TEXT.value.format(note.text.replace(' ', ''))
+                else:
+                    buffer += MarkdownFormatter.S_TEXT.value.format(note.text)
+                buffer += '\n'
         return buffer
